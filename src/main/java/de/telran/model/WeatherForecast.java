@@ -1,14 +1,22 @@
 package de.telran.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class WeatherForecast implements Comparable<WeatherForecast> {
+@Data
+public class WeatherForecast implements Comparable<WeatherForecast>{
 	private String title;
 	private ConsolidatedWeather[] consolidatedWeather;
-	
+
+	public WeatherForecast(String title, ConsolidatedWeather[] consolidatedWeather) {
+		this.title = title;
+		this.consolidatedWeather = consolidatedWeather;
+	}
+
 	public WeatherForecast() {}
 	
 	public String getTitle() {

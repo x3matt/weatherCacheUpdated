@@ -7,6 +7,9 @@ import de.telran.repository.WeatherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Service
 public class WeatherService {
     private ExternalWeatherService externalWeatherService;
@@ -23,6 +26,15 @@ public class WeatherService {
         CityWeather weather = weatherRepository.findByCity(city);
         if(weather == null){
             weather = createCityWeather(externalWeatherService.getWeatherForCity(city));
+            weatherRepository.save(weather);
+            return weather;
+        }
+        return weather;
+    }
+    public CityWeather getWeatherByCityName(String city, LocalDate date) throws CityNotFoundException {
+        CityWeather weather = weatherRepository.findByCityAndDate(city,date);
+        if(weather == null){
+            weather = createCityWeather(externalWeatherService.getWeatherForCity(city,date));
             weatherRepository.save(weather);
             return weather;
         }

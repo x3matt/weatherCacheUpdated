@@ -5,9 +5,10 @@ import de.telran.gateway.ExternalWeatherGateway;
 import de.telran.model.SearchResult;
 import de.telran.model.WeatherForecast;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -22,5 +23,9 @@ public class ExternalWeatherService {
     public WeatherForecast getWeatherForCity(String city) throws CityNotFoundException {
         Optional<SearchResult> searchResultsByCityName = gateway.getSearchResultsByCityName(city);
         return searchResultsByCityName.map(searchResult -> gateway.getForecast(searchResult.getWoeid())).orElseThrow(() -> new CityNotFoundException("city "+city+" not found"));
+    }
+    public WeatherForecast getWeatherForCity(String city, LocalDate date) throws CityNotFoundException {
+        Optional<SearchResult> searchResultsByCityName = gateway.getSearchResultsByCityName(city);
+        return searchResultsByCityName.map(searchResult -> gateway.getForecast(searchResult.getWoeid(),date)).orElseThrow(() -> new CityNotFoundException("city "+city+" not found"));
     }
 }
