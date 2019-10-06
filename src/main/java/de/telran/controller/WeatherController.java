@@ -24,12 +24,4 @@ public class WeatherController {
     CityWeather getCityWeather(@PathVariable String city) throws CityNotFoundException {
         return service.getWeatherByCityName(city);
     }
-    @GetMapping("/weather/{city}/{year}/{month}/{day}")
-    CityWeather getCityWeather(@PathVariable String city,
-                               @PathVariable int year,
-                               @PathVariable int month,
-                               @PathVariable int day) throws CityNotFoundException {
-        LocalDate date = LocalDate.of(year,month,day);
-        return service.getWeatherByCityName(city,date);
-    }
 }

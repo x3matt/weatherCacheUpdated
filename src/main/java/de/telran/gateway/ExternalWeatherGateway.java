@@ -5,9 +5,6 @@ import de.telran.model.WeatherForecast;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 public class ExternalWeatherGateway {
@@ -40,12 +37,6 @@ public class ExternalWeatherGateway {
 	
 	public WeatherForecast getForecast(String woeid) {
 		final String url = forecastUrl+woeid;	
-		ResponseEntity<WeatherForecast> exchange = rest.exchange(url,  HttpMethod.GET, null, WeatherForecast.class);
-		return exchange.getBody();
-	}
-
-	public WeatherForecast getForecast(String woeid, LocalDate date) {
-		final String url = forecastUrl+woeid+"/"+date.getYear()+"/"+date.getMonth().getValue()+"/"+date.getDayOfMonth();
 		ResponseEntity<WeatherForecast> exchange = rest.exchange(url,  HttpMethod.GET, null, WeatherForecast.class);
 		return exchange.getBody();
 	}

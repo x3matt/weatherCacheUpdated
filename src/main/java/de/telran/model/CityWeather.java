@@ -13,21 +13,15 @@ public class CityWeather {
     private @Id @GeneratedValue Long id;
     String city;
     double temp;
-    LocalDate date;
+    String date;
 
     public CityWeather() {
-
-    }
-
-    public CityWeather(String city, double temp, LocalDate date) {
-        this.city = city;
-        this.temp = temp;
-        this.date = date;
     }
 
     public CityWeather(String city, double temp) {
         this.city = city;
         this.temp = temp;
+        date = String.valueOf(LocalDate.now());
     }
 
     public String getCity() {
@@ -36,7 +30,8 @@ public class CityWeather {
     public double getTemp(){
         return temp;
     }
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
+
 }
