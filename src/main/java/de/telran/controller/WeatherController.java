@@ -24,4 +24,9 @@ public class WeatherController {
     CityWeather getCityWeather(@PathVariable String city) throws CityNotFoundException {
         return service.getWeatherByCityName(city);
     }
+    @GetMapping("/weather/{city}/{date}")
+    CityWeather getCityWeather(@PathVariable String city,@PathVariable String date) throws CityNotFoundException {
+        //date : yyyy-mm-dd
+        return service.getWeatherByCityNameAndDate(city,date);
+    }
 }
