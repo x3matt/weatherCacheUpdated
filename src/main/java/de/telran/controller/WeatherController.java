@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @RestController
 public class WeatherController {
     private WeatherService service;
@@ -20,5 +23,10 @@ public class WeatherController {
     @GetMapping("/weather/{city}")
     CityWeather getCityWeather(@PathVariable String city) throws CityNotFoundException {
         return service.getWeatherByCityName(city);
+    }
+    @GetMapping("/weather/{city}/{date}")
+    CityWeather getCityWeather(@PathVariable String city,@PathVariable String date) throws CityNotFoundException {
+        //date : yyyy-mm-dd
+        return service.getWeatherByCityNameAndDate(city,date);
     }
 }

@@ -5,9 +5,7 @@ import de.telran.gateway.ExternalWeatherGateway;
 import de.telran.model.SearchResult;
 import de.telran.model.WeatherForecast;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service

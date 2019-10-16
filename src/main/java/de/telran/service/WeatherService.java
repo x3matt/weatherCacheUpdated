@@ -28,6 +28,15 @@ public class WeatherService {
         }
         return weather;
     }
+    public CityWeather getWeatherByCityNameAndDate(String city,String date) throws CityNotFoundException {
+        CityWeather weather = weatherRepository.findByCityAndDate(city,date);
+        if(weather == null){
+            weather = createCityWeather(externalWeatherService.getWeatherForCity(city));
+            weatherRepository.save(weather);
+            return weather;
+        }
+        return weather;
+    }
 
     private CityWeather createCityWeather(WeatherForecast forecast){
         return new CityWeather(forecast.getTitle().toLowerCase(), forecast.getTemp());
